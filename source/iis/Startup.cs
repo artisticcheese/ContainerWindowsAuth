@@ -16,8 +16,10 @@ namespace Plain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.Configure<IISOptions>(options => {
+                options.AutomaticAuthentication = true;
+            });
             services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
-
         }
 
 
@@ -26,7 +28,7 @@ namespace Plain
         {
             app.UseMvc();
                 app.UseDeveloperExceptionPage();
-
+          
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

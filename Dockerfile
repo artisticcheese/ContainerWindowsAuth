@@ -1,4 +1,12 @@
 # escape=`
+FROM microsoft/aspnetcore-build:2.0.0-nanoserver As Builder
+WORKDIR /source/
+COPY source/iis .
+RUN dotnet restore; dotnet publish -c Release
+
+
+
+
 FROM microsoft/aspnetcore:2.0.0-nanoserver
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'Continue'; $verbosePreference='Continue';"]
 ADD https://az880830.vo.msecnd.net/nanoserver-ga-2016/Microsoft-NanoServer-IIS-Package_base_10-0-14393-0.cab /install/Microsoft-NanoServer-IIS-Package_base_10-0-14393-0.cab
@@ -17,5 +25,6 @@ RUN Import-Module IISAdministration; Start-IISCommitDelay; (Get-IISServerManager
     (Get-IISServerManager).Sites[0].Applications[0].VirtualDirectories[0].PhysicalPath = 'c:\app'; (Get-IISConfigSection -SectionPath 'system.webServer/security/authentication/windowsAuthentication').Attributes['enabled'].value = $true; `
     Stop-IISCommitDelay
 EXPOSE 80
-ADD ["\\bin\\*", "./"] 
+COPY --from=builder /source/bin/Release/netcoreapp2.0/publish .
+ADD ["\\bin\\spinner.exe", "\\bin\\web.config",  "./"] 
 ENTRYPOINT ["spinner.exe", "service", "W3SVC"]

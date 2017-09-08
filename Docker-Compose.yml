@@ -4,11 +4,8 @@ services:
       build:
         context: .
       image: winauth
-      environment: 
-        - "SHELL=powershell.exe"
       ports:
         - "80"
-        - "55539"
       networks:
         - nat
 networks:
