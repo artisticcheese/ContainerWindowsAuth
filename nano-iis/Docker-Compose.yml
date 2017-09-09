@@ -1,0 +1,13 @@
+version: '3.2'
+services:
+   nano-iis:
+      build:
+        context: .
+      image: artisticcheese/winauth:nano-iis
+      ports:
+        - "80"
+      networks:
+        - nat
+networks:
+  nat:
+    external: true

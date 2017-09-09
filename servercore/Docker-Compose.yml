@@ -3,7 +3,9 @@ services:
    WinAuth:
       build:
         context: .
-      image: winauth
+      image: artisticcheese/winauth:servercore
+      environment: 
+        - "SHELL=powershell.exe"
       ports:
         - "80"
       networks:
