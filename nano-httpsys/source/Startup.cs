@@ -16,8 +16,7 @@ namespace Plain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
-
+            services.AddAuthentication(Microsoft.AspNetCore.Server.HttpSys.HttpSysDefaults.AuthenticationScheme);;
         }
 
 
