@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+   nano-httpsys:
+      build:
+        context: .
+        dockerfile: dockerfile
+      image: artisticcheese/winauth:nano-httpsys
+      ports:
+        - "80"
+      networks:
+        - nat
+networks:
+  nat:
+    external: true
