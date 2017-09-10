@@ -3,6 +3,7 @@ services:
    nano-iis:
       build:
         context: .
+        dockerfile: dockerfile
       image: artisticcheese/winauth:nano-iis
       ports:
         - "80"

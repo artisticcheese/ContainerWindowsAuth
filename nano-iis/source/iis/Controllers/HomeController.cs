@@ -16,7 +16,7 @@ namespace Plain.Controllers
         [AllowAnonymous]
         public IActionResult Anonymous()
         {
-            return Content("You are anonymous");
+            return Content ("You are " + User.Identity.Name +  "; Authentication Type:" + User.Identity.AuthenticationType );;
         }
     }
 }
