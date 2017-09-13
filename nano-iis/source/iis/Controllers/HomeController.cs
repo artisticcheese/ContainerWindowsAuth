@@ -7,10 +7,17 @@ namespace Plain.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        [Authorize]
+        [Authorize(Roles = "Domain Admins")]
         public IActionResult Windows()
         {
+            
             return Content ("You are " + User.Identity.Name +  "; Authentication Type:" + User.Identity.AuthenticationType );
+        }
+        [Authorize(Roles = "Domain Users")]
+        public IActionResult Users()
+        {
+
+            return Content("You are " + User.Identity.Name + "; Authentication Type:" + User.Identity.AuthenticationType);
         }
 
         [AllowAnonymous]
