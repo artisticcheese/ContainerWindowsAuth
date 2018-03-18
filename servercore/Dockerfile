@@ -7,6 +7,8 @@ RUN Install-WindowsFeature "Web-Windows-Auth", "Web-Asp-Net45"
 #Adding local user for testing local Windows Authentication
 RUN  new-LocalUser -Name "ContainerAdmin" -Password  (ConvertTo-SecureString  "A123456!" -AsPlainText -Force); `
      Add-LocalGroupMember -Group Administrators -Member "ContainerAdmin" ; 
+# Add failure audit logging to debug Authentication Issues
+RUN Auditpol /set /category:"Logon/Logoff" /Success:enable /failure:enable
 COPY ["default.aspx", "c:\\inetpub\\wwwroot\\app\\"]
 RUN Import-Module IISAdministration; `
     Start-IISCommitDelay; `
