@@ -6,7 +6,7 @@ services:
         dockerfile: dockerfile
       image: artisticcheese/winauth:nano-iis
       ports:
-        - "80"
+        - "8080:80"
       networks:
         - nat
 networks:

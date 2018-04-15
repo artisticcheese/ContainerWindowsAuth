@@ -20,6 +20,12 @@ namespace Plain.Controllers
             return Content("You are " + User.Identity.Name + "; Authentication Type:" + User.Identity.AuthenticationType);
         }
 
+        public IActionResult LocalUsers()
+        {
+
+            return Content("You are " + User.Identity.Name + "; Authentication Type:" + User.Identity.AuthenticationType);
+        }
+
         [AllowAnonymous]
         public IActionResult Anonymous()
         {

@@ -11,7 +11,7 @@ COPY source/iis .
 RUN dotnet restore; dotnet publish -c Release
 
 # Middleware image used to extract ASP.NET core module
-From microsoft/iis as WindowsBuild
+FROM microsoft/iis as WindowsBuild
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'Continue'; $verbosePreference='Continue';"]
 # Installing NET CORE webhosting in middleware image so latest module and configuration schema is extracted for final image
 ADD https://download.microsoft.com/download/B/1/D/B1D7D5BF-3920-47AA-94BD-7A6E48822F18/DotNetCore.2.0.0-WindowsHosting.exe ".\hosting.exe"
